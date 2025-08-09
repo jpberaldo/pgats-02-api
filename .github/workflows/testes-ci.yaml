@@ -1,0 +1,30 @@
+# CI de Nível 01 - Disparo manual a partir de 1 clique
+
+# nome pipeline
+name: 'Execução Manual da pipeline'
+
+# regras/gatilhos(triggers)
+
+on:
+  workflow_dispatch:
+
+  #trabalhos/tarefas = jobs
+
+jobs:
+  api-tests:
+    #maquina que vai rodar
+    runs-on: ubuntu-latest
+
+    #passos do build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Instalando dependências
+        run: npm install
+
+      - name: Executando os testes de api
+        run: npm test
